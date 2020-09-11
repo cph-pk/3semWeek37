@@ -16,7 +16,7 @@
 
 Her er link til Movie API fra i tirsdags. På forsiden er der også link til de javascript opgaver fra i torsdags.
 ##### Sådan bruges API til Movie:
-Det nedenstående skal tastes efter `cphper.dk/movieapi/`
+Det nedenstående skal tastes efter `cphper.dk/movieapi/`  
 Tast `api/movie/count` for at se hvor mange records der er.  
 Tast `api/movie/all` for at se alle records.  
 Tast `api/movie/` + et tal(id) for at se en record.  
