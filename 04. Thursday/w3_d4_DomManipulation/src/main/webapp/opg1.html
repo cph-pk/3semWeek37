@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Simple DOM manipulation and Event handling</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="id1">TODO write content</div>
+        <div id="id2">TODO write content</div>
+        <div id="id3">TODO write content</div>
+        <button id="myBtn">Change color</button>
+        <a href="index.html" style="float: right;">go to index</a>
+        <script>
+            // opgave a
+            var style = document.getElementsByTagName("div");
+
+            for (var i = 0; i < style.length; i++) {
+                style[i].style.background = 'green';
+            }
+
+            // opgave b
+            document.getElementById("myBtn").addEventListener("click", differentColor);
+
+            function differentColor() {
+                document.getElementById("id1").style.backgroundColor = "blue";
+                document.getElementById("id2").style.backgroundColor = "red";
+                document.getElementById("id3").style.backgroundColor = "yellow";
+            }
+        </script>
+    </body>
+</html>

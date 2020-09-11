@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Using map and filter to create dynamic table-rows</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+              integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    </head>
+    <body>
+        <table class="table" id="allcars"></table>
+        Price:&nbsp;<input type="text" id="price" name="price">
+        <input type="button" id="priceBelow" value="Price less than">
+        <p id="message"></p>
+        <a href="index.html" style="float: right;">go to index</a>
+        <script>
+            var cars = [
+                {id: 1, year: 1997, make: 'Ford', model: 'E350', price: 3000},
+                {id: 2, year: 1999, make: 'Chevy', model: 'Venture', price: 4900},
+                {id: 3, year: 2000, make: 'Chevy', model: 'Venture', price: 5000},
+                {id: 4, year: 1996, make: 'Jeep', model: 'Grand Cherokee', price: 4799},
+                {id: 5, year: 2005, make: 'Volvo', model: 'V70', price: 44799}
+            ];
+
+            var carsToHtmlTable = "<thead><tr><th>id</th><th>Year</th><th>Make</th><th>Model</th><th>Price</th></tr></thead><tbody>" + cars.map(function (car) {
+                return "<tr><td>" + car.id + "</td><td>" + car.year + "</td><td>" + car.make + "</td><td>" + car.model + "</td><td>" + car.price + "</td></tr>";
+            }).join("") + "</tbody";
+
+            document.getElementById("allcars").innerHTML = carsToHtmlTable;
+
+
+
+            var priceBelow = document.getElementById("priceBelow");
+
+            priceBelow.onclick = function () {
+                var price = document.getElementById("price").value;
+                if (isNaN(price)) {
+                    document.getElementById("message").innerHTML = price + " is not a number";
+                } else if (price < 0) {
+                    document.getElementById("message").innerHTML = price + " is less than zero";
+                } else {
+                    //document.getElementById("message").innerHTML = price;
+                    var newcars = cars.filter(car => car.price < price);
+                    carsToHtmlTable = "<thead><tr><th>id</th><th>Year</th><th>Make</th><th>Model</th><th>Price</th></tr></thead><tbody>" + newcars.map(function (car) {
+                        return "<tr><td>" + car.id + "</td><td>" + car.year + "</td><td>" + car.make + "</td><td>" + car.model + "</td><td>" + car.price + "</td></tr>";
+                    }).join("") + "</tbody";
+                    document.getElementById("allcars").innerHTML = carsToHtmlTable;
+                   
+                    document.getElementById("message").innerHTML = "";
+                }
+            };
+
+
+        </script>
+    </body>
+</html>

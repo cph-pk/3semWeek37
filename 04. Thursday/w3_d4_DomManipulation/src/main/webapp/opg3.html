@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Using map to create list’s (ul’s, tables etc.)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body> 
+        <ul id="names"></ul>
+        <form id="form">
+            <input type="text" id="name" name="name">
+            <input type="submit" id="addname" value="Add name"><br><br>
+            <input type="button" id="first" value="remove first">
+            <input type="button" id="last" value="remove last">
+        </form>
+        <a href="index.html" style="float: right;">go to index</a>
+        <script>
+            var names = ["Lars", "Jan", "Peter", "Bo", "Frederik"];
+            // opg a
+
+
+            var namesToHtmlList = names.map(function (name) {
+                return "<li>" + name + "</li>";
+            }).join("");
+
+            document.getElementById("names").innerHTML = namesToHtmlList;
+
+            //opg b og c
+
+            var rfirst = document.getElementById('first');
+            var rlast = document.getElementById('last');
+
+            form.onsubmit = function (e) {
+                e.preventDefault();
+
+                var myname = document.getElementById("name").value;
+
+                names.push(myname);
+                var namesToHtmlList = names.map(function (name) {
+                    return "<li>" + name + "</li>";
+                }).join("");
+
+                document.getElementById("names").innerHTML = namesToHtmlList;
+                form.reset();
+            };
+
+            rfirst.onclick = function () {
+
+                names.shift();
+
+                var namesToHtmlList = names.map(function (name) {
+                    return "<li>" + name + "</li>";
+                }).join("");
+
+                document.getElementById("names").innerHTML = namesToHtmlList;
+            };
+
+            rlast.onclick = function () {
+
+                names.pop();
+
+                var namesToHtmlList = names.map(function (name) {
+                    return "<li>" + name + "</li>";
+                }).join("");
+
+                document.getElementById("names").innerHTML = namesToHtmlList;
+            };
+
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Event Bubbling and event arguments</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .mydiv {width: 25px; height: 25px;background-color:yellow; margin:1px;}
+        </style>
+    </head>
+    <body>
+        <div id="outer">
+            <div id="id1" class="mydiv"></div>
+            <div id="id2" class="mydiv"></div>
+            <div id="id3" class="mydiv"></div>
+            <div id="id4" class="mydiv"></div>
+            <div id="id5" class="mydiv"></div>
+            <div id="id6" class="mydiv"></div>
+            <div id="id7" class="mydiv"></div>
+            <div id="id8" class="mydiv"></div>
+            <div id="id9" class="mydiv"></div>
+            <div id="id10" class="mydiv"></div>
+        </div>
+        <p id="text"></p>
+        <a href="index.html" style="float: right;">go to index</a>
+        <script>
+           // Opgave a + b
+//           var outer = document.getElementById("outer");
+//           outer.onclick = function(e) {
+//               console.log("Clicked");
+//               var mee = this;
+//               var target = e.target;
+//               console.log(mee.id);
+//               console.log(target.id);
+//           };
+           
+           // Opgave c
+           var outer = document.getElementById("outer");
+           outer.onclick = function(e) {        
+               var target = e.target;
+               document.getElementById("text").innerHTML = "You pressed: " + target.id;
+           };
+        </script>
+    </body>
+</html>

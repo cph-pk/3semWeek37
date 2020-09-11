@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Dynamic UI manipulation using data obtained via fetch</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+              integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <input type="text" id="number" name="number">
+            <input type="button" id="user" value="Get user">
+            <input type="button" id="all" value="All users">
+            <a href="index.html" style="float: right;">go to index</a>
+            <p id="message"></p>
+            <div id="oneuser"></div>
+            <table class="table" id="allusers"></table>
+        </div>
+        <script>
+            var user = document.getElementById("user");
+            var all = document.getElementById("all");
+            let url = "https://jsonplaceholder.typicode.com/users/";
+
+            user.onclick = function () {
+                var number = document.getElementById("number").value;
+
+                if (isNaN(number)) {
+                    document.getElementById("message").innerHTML = number + " is not a number";
+                    document.getElementById("oneuser").innerHTML = "";
+                    document.getElementById("allusers").innerHTML = "";
+                } else if (number < 0 || number > 10) {
+                    document.getElementById("message").innerHTML = number + " is less than zero or higher than 10";
+                    document.getElementById("oneuser").innerHTML = "";
+                    document.getElementById("allusers").innerHTML = "";
+                } else if (number === null || number === "") {
+                    document.getElementById("message").innerHTML = "inputfield is empty";
+                    document.getElementById("oneuser").innerHTML = "";
+                    document.getElementById("allusers").innerHTML = "";
+                } else {
+
+                    let newurl = url + number;
+
+                    fetch(newurl)
+                            .then(res => res.json()) //in flow1, just do it
+                            .then(data => {
+                                // Inside this callback, and only here, the response data is available
+                                document.getElementById("oneuser").innerHTML = "<p>Name: " + data.name + "<br>Phone: " +
+                                        data.phone + "</p><h4>Address</h4><p>Street: " + data.address.street + "<br>City: " +
+                                        data.address.city + "<br>Zip: " + data.address.zipcode + "<br>Geo (lat,lng): " +
+                                        data.address.geo.lat + ", " + data.address.geo.lng + "</p>";
+
+                                console.log("data", data);
+
+                            });
+                    document.getElementById("allusers").innerHTML = "";
+                    document.getElementById("message").innerHTML = "";
+                }
+            };
+
+            all.onclick = function () {
+                fetch(url)
+                        .then(res => res.json()) //in flow1, just do it
+                        .then(data => {
+                            // Inside this callback, and only here, the response data is available
+
+
+
+                            var allUsers = "<thead><tr><th>Name</th><th>Phone</th></thead><tbody>";
+                            for (var i = 0; i < data.length; i++) {
+                                allUsers += "<tr><td>" + data[i].name + "</td><td>" + data[i].phone + "</td></tr>";
+                            }
+                            allUsers += "</tbody>";
+
+                            document.getElementById("allusers").innerHTML = allUsers;
+
+                            console.log("data", data);
+
+                        });
+                        
+                document.getElementById("oneuser").innerHTML = "";
+                document.getElementById("message").innerHTML = "";
+            };
+
+
+
+        </script>
+    </body>
+</html>
